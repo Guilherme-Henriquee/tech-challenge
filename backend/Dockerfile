@@ -1,0 +1,12 @@
+FROM node:18-alpine AS base
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY src ./src
+
+ENV NODE_ENV=production
+EXPOSE 3001
+
+CMD ["node", "src/server.js"]
